@@ -25,6 +25,13 @@ public class MainProject {
 //	            System.out.println("Thêm sản phẩm thất bại!");
 //	        }
 	        // Printing out the congViec objects from the list
+//	        String ProductName = "Laptop HP";
+//	        boolean result = text1.deleteProduct(ProductName);
+//	        if (result) {
+//	            System.out.println("Xoa sản phẩm thành công!");
+//	        } else {
+//	            System.out.println("Xoa sản phẩm thất bại!");
+//	        }
 	        for (Products x : dsCongViec) {
 	            System.out.println(x);  // This assumes the congViec class has a proper toString method
 	        }

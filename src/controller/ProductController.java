@@ -3,6 +3,7 @@ package controller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import models.Products;
@@ -27,7 +28,7 @@ public class ProductController {
             rs = pre.executeQuery();
             while (rs.next()) {
                 Products p = new Products();
-                p.setProductID(rs.getInt(1));
+                p.setProductID(rs.getInt("productId"));
                 p.setProductName(rs.getString("productName"));
                 p.setDescription(rs.getString("description"));
                 p.setBrand(rs.getString("brand"));
@@ -51,10 +52,38 @@ public class ProductController {
             pre.setString(3, product.getBrand());
             pre.setInt(4, product.getQuantity());
             return pre.executeUpdate() > 0;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
+    public boolean deleteProduct(String ProductName) {
+        String sql = "DELETE FROM products WHERE productName = ?";
+        try (PreparedStatement pre = con.prepareStatement(sql)) {
+            pre.setString(1, ProductName);  
+            int rowsAffected = pre.executeUpdate();
+            return rowsAffected > 0;  
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean updateProduct(Products product) {
+        String sql = "UPDATE products SET productName = ?, description = ?, brand = ?, quantity = ? WHERE productID = ?";
+        try (PreparedStatement pre = con.prepareStatement(sql)) {
+            pre.setString(1, product.getProductName());
+            pre.setString(2, product.getDescription());
+            pre.setString(3, product.getBrand());
+            pre.setInt(4, product.getQuantity());
+            pre.setInt(5, product.getProductID());
+            int rowsAffected = pre.executeUpdate();
+            return rowsAffected > 0;  
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    
 }
 
