@@ -3,7 +3,9 @@ package controller;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import models.Orders;
 import models.Products;
+import models.Users;
 
 public class MainProject {
 	static Connection con;
@@ -11,6 +13,10 @@ public class MainProject {
 		  con = ConnectData.getConnection();
 		   ProductController text1 = new ProductController(con);
 	        ArrayList<Products> dsCongViec = text1.getAllProduct();
+	        UserController text2 = new UserController(con);
+	        ArrayList<Users> dsnguoidung = text2.getAllUsers();
+	        OrderController text3 = new OrderController(con);
+	        ArrayList<Orders> dsdonhang = text3.getAllOrders();
 //	        Products newProduct = new Products();
 //	        newProduct.setProductName("Laptop HP");
 //	        newProduct.setDescription("Core i5, 8GB RAM");
@@ -32,8 +38,15 @@ public class MainProject {
 //	        } else {
 //	            System.out.println("Xoa sản phẩm thất bại!");
 //	        }
-	        for (Products x : dsCongViec) {
+//	        for (Products x : dsCongViec) {
+//	            System.out.println(x);  // This assumes the congViec class has a proper toString method
+//	        }
+//	        for (Users x : dsnguoidung) {
+//	            System.out.println(x);  // This assumes the congViec class has a proper toString method
+//	        }
+	        for (Orders x : dsdonhang) {
 	            System.out.println(x);  // This assumes the congViec class has a proper toString method
 	        }
+	        
 	    }
 }

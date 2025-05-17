@@ -35,7 +35,7 @@ public class ConnectData {
         try {
             if (connection != null) {
                 connection.close();
-                System.out.println("🔒 Đã đóng kết nối.");
+                System.out.println(" Đã đóng kết nối.");
             }
         } catch (Exception e) {
             e.printStackTrace();
